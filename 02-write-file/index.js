@@ -2,7 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 const filePath = '02-write-file/text-file.txt';
 const fileWriteStream = fs.createWriteStream(filePath, { flags: 'a' });
-console.log('Enter text to be written to the file. Type "exit" to end.');
+console.log('Enter text to be written to the file. Type "exit"  or "CTRL + C" to end.');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 
 rl.on('line', (input) => {
   if (input.toLowerCase() === 'exit') {
-    console.log('Hooray! You did it!!!');
+    // console.log('Hooray! You did it!!!');
     rl.close();
     process.exit();
   }
@@ -22,6 +22,8 @@ rl.on('line', (input) => {
 });
 
 rl.on('close', () => {
+  console.log('Hooray! You did it!!!');
+  rl.close();
   process.exit();
 });
 rl.prompt();
