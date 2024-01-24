@@ -9,10 +9,9 @@ async function displayFileInfo() {
 
     for (const file of files) {
       if (file.isFile()) {
-        const fileExtension = path.extname(file.name).slice(1);
-
+        const fileName = path.basename(file.name, path.extname(file.name));
         const fileStats = await fs.stat(path.join(folderPath, file.name));
-        console.log(`${file.name}-${fileExtension}-${fileStats.size} bytes`);
+        console.log(`${fileName}-${fileStats.size} bytes`);
       } else {
         console.error(`Error: ${file.name} is a directory, not a file.`);
       }
@@ -22,5 +21,4 @@ async function displayFileInfo() {
   }
 }
 
-// Execute the function
 displayFileInfo();
