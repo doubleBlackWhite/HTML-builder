@@ -11,7 +11,9 @@ async function copyDir(srcDir, destDir) {
       const srcFilePath = path.join(srcDir, file);
       const destFilePath = path.join(destDir, file);
 
-      if (!(await fs.existsSync(srcFilePath))) {
+      try {
+        await fs.access(srcFilePath);
+      } catch (error) {
         await fs.unlink(destFilePath);
       }
     }
@@ -36,4 +38,5 @@ async function copyDir(srcDir, destDir) {
     console.error(`Error: ${error.message}`);
   }
 }
+
 copyDir('04-copy-directory/files', '04-copy-directory/files-copy');
